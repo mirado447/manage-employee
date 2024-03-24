@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Information</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="headerFragment :: header" ></div>
+
+<h1>List employees</h1>
+<form th:action="@{/info}" method="get" class="filter" >
+    <input type="text" name="Finder" placeholder="recherche" >
+    <input type="date" name="DateFinder" >
+    <input type="text" name="sortByName" th:value="${sortByName}">
+    <input type="radio" name="sortDirection" value="asc" th:checked="${sortByName && sortDirection == 'asc'}"> Croissant
+    <input type="radio" name="sortDirection" value="desc" th:checked="${sortByName && sortDirection == 'desc'}"> Décroissant
+    <button type="submit" >Filter</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Post</th>
+        <th>Sex</th>
+        <th>Country code</th>
+        <th>Phone Number</th>
+        <th>Image</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employeeToShow}">
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.post}" ></td>
+        <td th:text="${employee.sex}" ></td>
+        <td th:text="${employee.countryCode}" ></td>
+        <td th:text="${employee.countryCode}+''+${employee.telephone.substring(1)}" ></td>
+        <td><img th:src="${'data:image/jpeg;base64,'+ employee.image }"></td>
+        <td>
+            <div>
+                <button type="submit">
+                    <a th:href="@{/infoPerso/{id}(id=${employee.id})}">See more</a>
+                </button>
+            </div>
+            <div>
+                <button type="submit">
+                    <a th:href="@{/updatePage/{id}(id=${employee.id})}">Update</a>
+                </button>
+            </div>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<button class="csvB">
+    <a th:href="@{/export/csv(Finder=${Finder},DateFinder=${DateFinder})}" >Export csv</a>
+</button>
+</body>
+</html>

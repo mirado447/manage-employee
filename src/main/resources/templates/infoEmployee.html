@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Information</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2>Employees</h2>
+<table>
+  <thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Birth Date</th>
+    <th>Matricule</th>
+    <th>Image</th>
+    <th>Sex</th>
+    <th>Phone</th>
+    <th>Adresse</th>
+    <th>Email pro</th>
+    <th>Email perso</th>
+    <th>CIN</th>
+    <th>Post</th>
+    <th>Child</th>
+    <th>Hiring date</th>
+    <th>Departure date</th>
+    <th>Category</th>
+    <th>CNaPS</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employeeInfo}">
+    <td th:text="${employee.firstName}"></td>
+    <td th:text="${employee.lastName}"></td>
+    <td th:text="${employee.matrix}" ></td>
+    <td> <img th:src="'data:image/jpeg;base64,'+${employee.image}" alt="image de profile"> </td>
+    <td th:text="${employee.sex}" ></td>
+    <td th:text="${employee.telephone}" ></td>
+    <td th:text="${employee.adresse}" ></td>
+    <td th:text="${employee.emailPro}" ></td>
+    <td th:text="${employee.emailPerso}" ></td>
+    <td th:text="${employee.cin}" ></td>
+    <td th:text="${employee.post}" ></td>
+    <td th:text="${employee.child}" ></td>
+    <td th:text="${employee.embaucheDate}" ></td>
+    <td th:text="${employee.departDate}" ></td>
+    <td th:text="${employee.category}" ></td>
+    <td th:text="${employee.numeroCnaps}" ></td>
+    <td>
+      <div>
+      <button type="submit">
+        <a th:href="@{/updatePage/{id}(id=${employee.id})}">Update</a>
+      </button>
+      <button>
+        <a th:href="@{/infoPerso/{id}/pdf(id=${employee.id})}">Générer PDF</a>
+      </button>
+      </div>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+</body>
+</html>

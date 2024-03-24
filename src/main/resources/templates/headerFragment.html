@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ma page</title>
+    <link rel="stylesheet"th:href="@{/css/style.css}">
+</head>
+<body>
+<nav th:fragment="header" >
+    <div>
+        <div>
+            <h1 th:text="MyEntreprise"></h1>
+        </div>
+        <div>
+            <ul>
+                <li><a th:href="@{/add}">Add</a></li>
+                <li><a th:href="@{/info}" >Info</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
